@@ -1,0 +1,5 @@
+*.wasm
+linpack_bench
+linpack_bench_single
+linpack_bench_double
+linpack_bench_quad
