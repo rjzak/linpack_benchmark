@@ -1,3 +1,4 @@
+/.idea
 *.wasm
 linpack_bench
 linpack_bench_single

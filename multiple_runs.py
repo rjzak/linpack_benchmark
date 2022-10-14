@@ -1,9 +1,14 @@
 #!/usr/bin/python3
 
 import subprocess
+import time
+
 
 def parse_bench_output(input_text: str) -> float:
-    mflops = ""
+    """
+    Identify the MFlops output value, which is on the second line
+    after the MFLOPS label
+    """
     line_with_mflops = -1
     for index, line in enumerate(input_text.split("\n")):
         if "MFLOPS" in line:
@@ -13,24 +18,32 @@ def parse_bench_output(input_text: str) -> float:
             return float(parts[3])
     return -1.0
 
-def run_bench(command: str, iterations:int =10):
+
+def run_bench(command: str, iterations: int = 10):
+    """
+    Store the observed MFlops, and display some stats.
+    """
     values = []
+    elapsed_seconds = 0.0
     for _ in range(iterations):
+        start = time.perf_counter()
         result = subprocess.run(command, capture_output=True, text=True, shell=True).stdout
+        elapsed_seconds += time.perf_counter()-start
         values.append(parse_bench_output(result))
     avg = sum(values) / len(values)
 
     # https://www.geeksforgeeks.org/python-standard-deviation-of-list/
     variance = sum([((x - avg) ** 2) for x in values]) / len(values)
-    stdd = variance ** 0.5
+    std_dev = variance ** 0.5
 
     print("Max: {:.2f}".format(max(values)))
     print("Min: {:.2f}".format(min(values)))
     print("Average: {:.2f}".format(avg))
-    print("Std Dev: {:.2f}".format(stdd))
+    print("Std Dev: {:.2f}".format(std_dev))
+    print("Seconds: {:.2f}".format(elapsed_seconds))
+
 
 if __name__ == "__main__":
-    import os
     import sys
 
     if len(sys.argv) < 2 or len(sys.argv) > 3:
