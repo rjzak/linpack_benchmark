@@ -41,6 +41,7 @@ def run_bench(command: str, iterations: int = 10):
     print("Average: {:.2f}".format(avg))
     print("Std Dev: {:.2f}".format(std_dev))
     print("Seconds: {:.2f}".format(elapsed_seconds))
+    print("Runs: {}".format(len(values)))
 
 
 if __name__ == "__main__":
