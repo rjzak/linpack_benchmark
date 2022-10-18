@@ -27,9 +27,14 @@ def run_bench(command: str, iterations: int = 10):
     elapsed_seconds = 0.0
     for _ in range(iterations):
         start = time.perf_counter()
-        result = subprocess.run(command, capture_output=True, text=True, shell=True).stdout
+        result = subprocess.run(command, capture_output=True, text=True, shell=True)
         elapsed_seconds += time.perf_counter()-start
-        values.append(parse_bench_output(result))
+        if result.returncode != 0:
+            print("Error running \"{}\"".format(command))
+            if len(result.stderr) > 0:
+                print(result.stderr.strip())
+            return
+        values.append(parse_bench_output(result.stdout))
     avg = sum(values) / len(values)
 
     # https://www.geeksforgeeks.org/python-standard-deviation-of-list/
