@@ -23,6 +23,7 @@
 | Intel i5-1035G7  | Native            | Single    | Fortran  |  3882.29   |  3684.00   |  3984.00   | 58.32          | 100   | 27.07   |
 | Intel i5-1035G7  | Native            | Double    | Fortran  |  1870.01   |  1818.00   |  1904.00   | 17.51          | 100   | 46.26   |
 | Intel i5-1035G7  | Native            | Double    | C        |  1960.79   |  1904.63   |  1992.77   | 19.09          | 100   | 45.29   |
+| Intel i5-1035G7  | Native            | Quad      | Fortran  |    20.80   |    20.61   |    21.41   | 0.16           | 100   | 3624.80 |
 | Intel i5-1035G7  | Enarx[^1] SGX[^2] | Double    | C        |   388.06   |   317.73   |   794.73   | 47.65          | 100   | 1088.42 |
 | Raspberry Pi 3   | Native            | Single    | Fortran  |    90.76   |    81.05   |   111.00   | 6.62           | 100   | 784.07  |
 | Raspberry Pi 3   | Native            | Double    | Fortran  |    62.28   |    57.85   |    71.77   | 3.24           | 100   | 1132.48 |
